@@ -51,8 +51,8 @@ def G(M):
                 l += 1
         if t==1:
             x+=3
-    for i in range(7):
-        A[i][6]=M[][0]
+    for i in range(6):
+        A[i][6]=M[1-i%2][(i//2)*2]
     for j in range(6):
         A[6][j]=M[][0]
 
