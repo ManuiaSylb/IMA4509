@@ -6,8 +6,13 @@ import numpy as np
 
 image="lena15.jpg"
 
-def creation_systeme():
+def creation_systeme_R():
     A=np.zeros_like([6,6])
-    b=
+    b=np.zeros_like([6,1])
+    c=np.zeros_like([6,1])
+
+
+
+
 
 if __name__ == '__main__':
