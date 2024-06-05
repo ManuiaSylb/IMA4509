@@ -10,6 +10,7 @@ def recherche_pivot(A, b, j):
             b[[p, j]] = b[[j, p]]
             A[[p, j]] = A[[j, p]]
 
+
 def elimination_bas(A, b, j):
     for i in range(j+1, A.shape[0]):
         b[i] = b[i] - (A[i, j] / A[j, j]) * b[j]
