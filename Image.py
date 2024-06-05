@@ -11,14 +11,12 @@ def CanauxDeCouleur(image):
 
     return canal_rouge,canal_vert,canal_bleu
 
-img= "lena15.jpg"
-
-
-def auto_corell():
-    canal_R, canal_G, canal_B = CanauxDeCouleur(img)
+def auto_corell(image):
+    canal_R, canal_G, canal_B = CanauxDeCouleur(image)
     l,w = np.shape(canal_R)
     col = 0
     ligne = 0
+    self=0
     Moyenne=[]
 
 
@@ -44,16 +42,17 @@ def auto_corell():
                 for j in range(1, w-1):
                     col += canal_1[i,j]*canal_2[i-1,j]
                     ligne += canal_1[i,j]*canal_2[i,j-1]
+                    self += canal_1[i,j]*canal_2[i,j]
             N=(l-2)*(w-2)
             moyenne_col = col/N
             moyenne_ligne=ligne/N
+            moyenne_self=self/N
 
-            Moyenne.append([moyenne_ligne,moyenne_col])
+            Moyenne.append([moyenne_ligne,moyenne_col,moyenne_self])
 
     return Moyenne
 
 
-print(auto_corell())
 
 
 
