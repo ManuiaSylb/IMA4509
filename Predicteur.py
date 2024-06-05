@@ -1,4 +1,5 @@
 #METHODES PIVOT DE GAUSS#
+import numpy as np
 
 def recherche_pivot(A, b, j):
     p = j
@@ -38,7 +39,5 @@ def gauss(A, b):
     descente(U, v)
     remontee(U, v)
     return solve_diagonal(U, v)
-
-
 
 
