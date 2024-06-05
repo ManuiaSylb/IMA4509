@@ -16,6 +16,7 @@ def auto_corell(image):
     l,w = np.shape(canal_R)
     col = 0
     ligne = 0
+    diag=0
     self=0
     Moyenne=[]
 
@@ -43,12 +44,14 @@ def auto_corell(image):
                     col += canal_1[i,j]*canal_2[i-1,j]
                     ligne += canal_1[i,j]*canal_2[i,j-1]
                     self += canal_1[i,j]*canal_2[i,j]
+                    diag += canal_1[i-1,j]*canal_2[i,j-1]
             N=(l-2)*(w-2)
             moyenne_col = col/N
             moyenne_ligne=ligne/N
             moyenne_self=self/N
+            moyenne_diag=diag/N
 
-            Moyenne.append([moyenne_ligne,moyenne_col,moyenne_self])
+            Moyenne.append([moyenne_ligne,moyenne_col,moyenne_self,moyenne_diag])
 
     return Moyenne
 
