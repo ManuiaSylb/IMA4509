@@ -8,9 +8,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-image="lena15.jpg"
 
-M=auto_corell(image)
 
 def R(M):
     A=np.zeros((6,6))
@@ -108,11 +106,12 @@ def reco_R(image,r,g,b):
 
 if __name__ == '__main__':
 
-
+    image = "lena15.jpg"
+    M = auto_corell(image)
     r,g,b=R(M),G(M),B(M)
     Predit=reco_R(image,r,g,b)
 
-    img=cv2.imread(image)
+
 
 
 
