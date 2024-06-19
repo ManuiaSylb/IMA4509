@@ -1,6 +1,6 @@
 #METHODES PIVOT DE GAUSS#
 import numpy as np
-
+import numpy as np
 def recherche_pivot(A, b, j):
     p = j
     for i in range(j+1, A.shape[0]):
@@ -10,6 +10,7 @@ def recherche_pivot(A, b, j):
             b[[p, j]] = b[[j, p]]
             A[[p, j]] = A[[j, p]]
 
+b = np.array([0, -7, 4, 2], dtype=float)
 
 def elimination_bas(A, b, j):
     for i in range(j+1, A.shape[0]):
@@ -41,4 +42,8 @@ def gauss(A, b):
     remontee(U, v)
     return solve_diagonal(U, v)
 
+A = np.array([[2, 4, -4, 1],
+[3, 6, 1, -2],
+[-1, 1, 2, 3],
+[1, 1, -4, 1]], dtype=float)
 
