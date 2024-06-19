@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 
 def CanauxDeCouleur(image):
     img = cv2.imread(image)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
     canal_rouge=img[:,:,0]
     canal_vert=img[:,:,1]

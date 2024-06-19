@@ -27,7 +27,6 @@ def R(M):
                 l += 1
         if t==1:
             x+=3
-
     r=gauss(A,b)
 
     return r
@@ -39,10 +38,10 @@ def G(M):
 
     for i in range(6):
         t=i%2
-        l = x+1
+        l = x
+        b[i] = M[i // 2 * 3 + 1][1 - t]
         for j in range(6):
             w = j % 2
-            b[i] = M[l][1-t]
             terme = M[l][2 +t+(-1)**i*w]
             A[i][j]=terme
             if w == 1:
@@ -50,14 +49,16 @@ def G(M):
         if t==1:
             x+=3
     for i in range(6):
-        A[i][6]=M[1-i%2][(i//2)*2]
+        A[i][6]=M[i//2*3][1-i%2]
     for j in range(6):
-        A[6][j]=M[][0]
+        A[6][j]=M[j//2][1-j%2]
+    A[6][6]=M[0][2]
+    b[6]=M[1][2]
+
 
     g=gauss(A,b)
 
     return g
-
 
 def B(M):
     A=np.zeros((8,8))
@@ -66,30 +67,42 @@ def B(M):
 
     for i in range(6):
         t=i%2
-        l = x+2
+        l = x
+        b[i] = M[i // 2 * 3 + 1][1 - t]
         for j in range(6):
             w = j % 2
-            b[i] = M[l][1-t]
             terme = M[l][2 +t+(-1)**i*w]
             A[i][j]=terme
             if w == 1:
                 l += 1
         if t==1:
             x+=3
-    for i in range(7):
-        A[i][6]=M[][0]
+    for i in range(6):
+        A[i][6]=M[i//2*3][1-i%2]
     for j in range(6):
-        A[6][j]=M[][0]
+        A[6][j]=M[j//2][1-j%2]
+    A[6][6]=M[0][2]
+    b[6]=M[1][2]
+    for i in range(6):
+        A[i][7]=M[i//2*3+1][1-i%2]
+    for j in range(6):
+        A[7][j]=M[3+j//2][1-j%2]
+    A[7][6]=M[3][3]
+    A[6][7]=M[1][3]
+    A[7][7]=M[4][2]
+    b[7]=M[1][2]
 
-    for i in range(8):
-        A[i][7]=M[][1]
-    for j in range(8):
-        A[7][j]=M[][1]
-    b=gauss(A,b)
 
-    return b
+    B=gauss(A,b)
 
-def reco_R(image,r,g,b):
+    return B
+
+
+
+
+
+
+def reco(image,r,g,b):
     img = cv2.imread(image)
     Predit=np.zeros(img.shape)
     R,G,B=CanauxDeCouleur(image)
@@ -106,12 +119,16 @@ def reco_R(image,r,g,b):
 
 if __name__ == '__main__':
 
-    image = "lena15.jpg"
+    image = "test.jpg"
     M = auto_corell(image)
-    r,g,b=R(M),G(M),B(M)
-    Predit=reco_R(image,r,g,b)
-
-
-
+    r=R(M)
+    g=G(M)
+    b=B(M)
+    print(r,g,b)
+    Predit=reco(image,r,g,b)
+    cv2.imshow('image',Predit)
+    cv2.imshow('Image', image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
 
