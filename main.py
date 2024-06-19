@@ -127,7 +127,6 @@ if __name__ == '__main__':
     print(r,g,b)
     Predit=reco(image,r,g,b)
     cv2.imshow('image',Predit)
-    cv2.imshow('Image', image)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
